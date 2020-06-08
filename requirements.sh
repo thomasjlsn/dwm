@@ -10,6 +10,6 @@ sudo apt install \
   libxcb1-dev \
   libxft-dev \
   libxinerama-dev \
-  libxll-xcb-dev \
-  libxll-xcb1 \
+  libx11-xcb-dev \
+  libx11-xcb1 \
   libxrandr-dev
