@@ -24,14 +24,28 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
-	{ "Gimp",        NULL,       NULL,           0,         1,          0,           0,        -1 },
-	{ "Firefox",     NULL,       NULL,           0,         0,          0,           0,        -1 },
-        { "Pavucontrol", NULL,       NULL,           0,         1,          0,           0,        -1 },
-        { "Gpick",       NULL,       NULL,           0,         1,          0,           0,        -1 },
-        { "alacritty",   NULL,       NULL,           0,         0,          1,          -1,        -1 },
-	{ "st",          NULL,       NULL,           0,         0,          1,          -1,        -1 },
-	{ NULL,          NULL,       "Event Tester", 0,         1,          0,           1,        -1 }, /* xev */
+	/* class         instance    title           tags mask  isfloating  isterminal   noswallow  monitor */
+	{ "Gimp",        NULL,       NULL,           0,         1,          0,           0,         -1 },
+	{ "Firefox",     NULL,       NULL,           0,         0,          0,           0,         -1 },
+        { "Pavucontrol", NULL,       NULL,           0,         1,          0,           0,         -1 },
+        { "Gpick",       NULL,       NULL,           0,         1,          0,           0,         -1 },
+
+        /* terminal emulators */
+        { "alacritty",      NULL,       NULL,           0,         0,          1,           -1,         -1 },
+        { "Terminal",       NULL,       NULL,           0,         0,          1,           -1,         -1 },
+	{ "st",             NULL,       NULL,           0,         0,          1,           -1,         -1 },
+
+        /* =================================================================
+         * as of st 8.3, it no longer sets its own xwindow class, so it
+         * defaults to $TERM (what a fucking terrible idea). Since no
+         * server I've ever seen recongizes st as a valid terminal, I
+         * slawys set $TERM to xterm*... The following is a workaround for
+         * this issue.
+         * =================================================================
+         */
+	{ "xterm",          NULL,       NULL,           0,         0,          1,           -1,         -1 },
+	{ "xterm-256color", NULL,       NULL,           0,         0,          1,           -1,         -1 },
+	{ NULL,             NULL,       "Event Tester", 0,         1,          0,           1,          -1 }, /* xev */
 };
 
 /* layout(s) */
@@ -76,7 +90,7 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 
         /* applications */
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = wwwcmd } },
         { MODKEY,                       XK_Print,  spawn,          {.v = scrotcmd } },
