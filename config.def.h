@@ -27,25 +27,27 @@ static const Rule rules[] = {
 	/* class         instance    title           tags mask  isfloating  isterminal   noswallow  monitor */
 	{ "Gimp",        NULL,       NULL,           0,         1,          0,           0,         -1 },
 	{ "Firefox",     NULL,       NULL,           0,         0,          0,           0,         -1 },
-        { "Pavucontrol", NULL,       NULL,           0,         1,          0,           0,         -1 },
-        { "Gpick",       NULL,       NULL,           0,         1,          0,           0,         -1 },
+	{ "Pavucontrol", NULL,       NULL,           0,         1,          0,           0,         -1 },
+	{ "Gpick",       NULL,       NULL,           0,         1,          0,           0,         -1 },
 
-        /* terminal emulators */
-        { "alacritty",      NULL,       NULL,           0,         0,          1,           -1,         -1 },
-        { "Terminal",       NULL,       NULL,           0,         0,          1,           -1,         -1 },
+	/* terminal emulators */
+	{ "alacritty",      NULL,       NULL,           0,         0,          1,           -1,         -1 },
+	{ "Terminal",       NULL,       NULL,           0,         0,          1,           -1,         -1 },
 	{ "st",             NULL,       NULL,           0,         0,          1,           -1,         -1 },
 
-        /* =================================================================
-         * as of st 8.3, it no longer sets its own xwindow class, so it
-         * defaults to $TERM (what a fucking terrible idea). Since no
-         * server I've ever seen recongizes st as a valid terminal, I
-         * slawys set $TERM to xterm*... The following is a workaround for
-         * this issue.
-         * =================================================================
-         */
+	/* =================================================================
+	 * as of st 8.3, it no longer sets its own xwindow class, so it
+	 * defaults to $TERM (what a fucking terrible idea). Since no
+	 * server I've ever seen recongizes st as a valid terminal, I
+	 * slawys set $TERM to xterm*... The following is a workaround for
+	 * this issue.
+	 * =================================================================
+	 */
 	{ "xterm",          NULL,       NULL,           0,         0,          1,           -1,         -1 },
 	{ "xterm-256color", NULL,       NULL,           0,         0,          1,           -1,         -1 },
-	{ NULL,             NULL,       "Event Tester", 0,         1,          0,           1,          -1 }, /* xev */
+
+	/* don't swallow xev */
+	{ NULL,             NULL,       "Event Tester", 0,         1,          0,           1,          -1 },
 };
 
 /* layout(s) */
@@ -89,19 +91,19 @@ static const char *voldowncmd[] = { "amixer", "-D", "pulse", "sset", "Master", "
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 
-        /* applications */
+	/* applications */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = wwwcmd } },
-        { MODKEY,                       XK_Print,  spawn,          {.v = scrotcmd } },
+	{ MODKEY,                       XK_Print,  spawn,          {.v = scrotcmd } },
 
 	/* dwm */
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
         { MODKEY,                       XK_space,  zoom,           {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-        { MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-        { MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
+	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY|ShiftMask,             XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = lockcmd } },
@@ -122,7 +124,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 
-        /* FN keys */
+	/* FN keys */
 	{ 0,                            XF86XK_Search,             spawn,          {.v = dmenucmd } },
 	{ 0,                            XF86XK_MonBrightnessUp,    spawn,          {.v = brightnessupcmd } },
 	{ 0,                            XF86XK_MonBrightnessDown,  spawn,          {.v = brightnessdowncmd } },
