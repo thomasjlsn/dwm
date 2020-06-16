@@ -3,13 +3,14 @@
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
+static const int rmaster            = 1;        /* 1 means master-area is initially on the right */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */
 static const char *fonts[]          = { "fira code:size=12" };
 static const char dmenufont[]       = "fira code:size=12";
 
-#include "colors.tomorrow.h"
+#include "colors.dark.h"
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -25,7 +26,7 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class         instance    title           tags mask  isfloating  isterminal   noswallow  monitor */
-	{ "Gimp",        NULL,       NULL,           0,         1,          0,           0,         -1 },
+	{ "Gimp",        NULL,       NULL,           0,         0,          0,           0,         -1 },
 	{ "Firefox",     NULL,       NULL,           0,         0,          0,           0,         -1 },
 	{ "Pavucontrol", NULL,       NULL,           0,         1,          0,           0,         -1 },
 	{ "Gpick",       NULL,       NULL,           0,         1,          0,           0,         -1 },
@@ -51,7 +52,7 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.65; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.25; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 
@@ -76,7 +77,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", NULL };
-static const char *termcmd[]  = { "st",        NULL };
+static const char *termcmd[]  = { "alacritty", NULL };
 static const char *wwwcmd[]   = { "firefox",   NULL };
 static const char *scrotcmd[] = { "scrot",     NULL };
 static const char *lockcmd[]  = { "slock",     NULL };
@@ -110,6 +111,7 @@ static Key keys[] = {
 	// { MODKEY,                       XK_Tab,    view,           {0} },
 
 	/* layouts */
+	{ MODKEY,                       XK_s,      togglermaster,  {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
