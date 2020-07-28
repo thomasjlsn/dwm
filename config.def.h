@@ -77,11 +77,12 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
-static const char *wwwcmd[]   = { "firefox",   NULL };
-static const char *scrotcmd[] = { "scrot",     NULL };
-static const char *lockcmd[]  = { "slock",     NULL };
+static const char *dmenucmd[] = { "dmenu_run",            NULL };
+static const char *passcmd[]  = { "passmenu", "-l", "10", NULL };
+static const char *termcmd[]  = { "alacritty",            NULL };
+static const char *wwwcmd[]   = { "firefox",              NULL };
+static const char *scrotcmd[] = { "scrot",                NULL };
+static const char *lockcmd[]  = { "slock",                NULL };
 
 /* function keys */
 static const char *brightnessupcmd[] = { "dwm_backlight", "up", "100",   NULL };
@@ -95,6 +96,7 @@ static Key keys[] = {
 
 	/* applications */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_p,      spawn,          {.v = passcmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = wwwcmd } },
 	{ MODKEY,                       XK_Print,  spawn,          {.v = scrotcmd } },
