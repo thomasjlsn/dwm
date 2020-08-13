@@ -30,6 +30,7 @@ static const Rule rules[] = {
 	{ "Firefox",     NULL,       NULL,           0,         0,          0,           0,         -1 },
 	{ "Pavucontrol", NULL,       NULL,           0,         1,          0,           0,         -1 },
 	{ "Gpick",       NULL,       NULL,           0,         1,          0,           0,         -1 },
+	{ "gvim",        NULL,       NULL,           0,         0,          0,           0,         -1 },
 
 	/* terminal emulators */
 	{ "alacritty",      NULL,       NULL,           0,         0,          1,           -1,         -1 },
@@ -79,8 +80,9 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run",            NULL };
 static const char *passcmd[]  = { "passmenu", "-l", "10", NULL };
-static const char *termcmd[]  = { "alacritty",            NULL };
+static const char *termcmd[]  = { "st",                   NULL };
 static const char *wwwcmd[]   = { "firefox",              NULL };
+static const char *gvimcmd[]  = { "gvim",                 NULL };
 static const char *scrotcmd[] = { "scrot",                NULL };
 static const char *lockcmd[]  = { "slock",                NULL };
 
@@ -97,6 +99,7 @@ static Key keys[] = {
 	/* applications */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = passcmd } },
+	{ MODKEY,                       XK_g,      spawn,          {.v = gvimcmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = wwwcmd } },
 	{ MODKEY,                       XK_Print,  spawn,          {.v = scrotcmd } },
