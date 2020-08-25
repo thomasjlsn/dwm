@@ -31,6 +31,7 @@ static const Rule rules[] = {
 	{ "Pavucontrol", NULL,       NULL,           0,         1,          0,           0,         -1 },
 	{ "Gpick",       NULL,       NULL,           0,         1,          0,           0,         -1 },
 	{ "gvim",        NULL,       NULL,           0,         0,          0,           0,         -1 },
+	{ "Zenity",      NULL,       "zenity",       0,         0,          0,           0,         -1 },
 
 	/* terminal emulators */
 	{ "alacritty",      NULL,       NULL,           0,         0,          1,           -1,         -1 },
