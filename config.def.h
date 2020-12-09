@@ -77,21 +77,21 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run",              NULL };
-static const char *passcmd[]  = { "passmenu", "-l", "10",   NULL };
-static const char *wallcmd[]  = { "random-wallpaper", "-f", NULL };
-static const char *termcmd[]  = { "alacritty",              NULL };
-static const char *wwwcmd[]   = { "firefox",                NULL };
-static const char *scrotcmd[] = { "scrot",                  NULL };
-static const char *lockcmd[]  = { "slock",                  NULL };
-static const char *killcmd[]  = { "xkill",                  NULL };
+static const char *dmenucmd[] = { "wmctl", "launcher",            NULL };
+static const char *passcmd[]  = { "wmctl", "passmngr",            NULL };
+static const char *wallcmd[]  = { "wmctl", "set",   "wallpaper",  NULL };
+static const char *termcmd[]  = { "wmctl", "spawn", "term",       NULL };
+static const char *wwwcmd[]   = { "wmctl", "spawn", "browser",    NULL };
+static const char *scrotcmd[] = { "wmctl", "screenshot",          NULL };
+static const char *lockcmd[]  = { "wmctl", "lock",                NULL };
+static const char *killcmd[]  = { "wmctl", "kill",                NULL };
 
 /* function keys */
-static const char *brightnessupcmd[] = { "dwm_backlight", "up", "100",   NULL };
-static const char *brightnessdncmd[] = { "dwm_backlight", "down", "100", NULL };
-static const char *voltogcmd[]  = { "amixer", "-D", "pulse", "sset", "Master", "toggle",  NULL };
-static const char *volupcmd[]   = { "amixer", "-D", "pulse", "sset", "Master", "5%+",     NULL };
-static const char *voldowncmd[] = { "amixer", "-D", "pulse", "sset", "Master", "5%-",     NULL };
+static const char *brightnessupcmd[] = { "wmctl", "set", "backlight", "up",    NULL };
+static const char *brightnessdncmd[] = { "wmctl", "set", "backlight", "down",  NULL };
+static const char *voltogcmd[]       = { "wmctl", "set", "volume",    "mute",  NULL };
+static const char *volupcmd[]        = { "wmctl", "set", "volume",    "up",    NULL };
+static const char *voldowncmd[]      = { "wmctl", "set", "volume",    "down",  NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
