@@ -77,14 +77,15 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "wmctl", "launcher",            NULL };
-static const char *passcmd[]  = { "wmctl", "passmngr",            NULL };
-static const char *wallcmd[]  = { "wmctl", "set",   "wallpaper",  NULL };
-static const char *termcmd[]  = { "wmctl", "spawn", "term",       NULL };
-static const char *wwwcmd[]   = { "wmctl", "spawn", "browser",    NULL };
-static const char *scrotcmd[] = { "wmctl", "screenshot",          NULL };
-static const char *lockcmd[]  = { "wmctl", "lock",                NULL };
-static const char *killcmd[]  = { "wmctl", "kill",                NULL };
+static const char *dmenucmd[]  = { "wmctl", "launcher",            NULL };
+static const char *passcmd[]   = { "wmctl", "passmngr",            NULL };
+static const char *wallcmd[]   = { "wmctl", "set",   "wallpaper",  NULL };
+static const char *termcmd[]   = { "wmctl", "spawn", "term",       NULL };
+static const char *wwwcmd[]    = { "wmctl", "spawn", "browser",    NULL };
+static const char *editorcmd[] = { "wmctl", "spawn", "editor",     NULL };
+static const char *scrotcmd[]  = { "wmctl", "screenshot",          NULL };
+static const char *lockcmd[]   = { "wmctl", "lock",                NULL };
+static const char *killcmd[]   = { "wmctl", "kill",                NULL };
 
 /* function keys */
 static const char *brightnessupcmd[] = { "wmctl", "set", "backlight", "up",    NULL };
@@ -103,6 +104,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = wwwcmd } },
 	{ MODKEY,                       XK_Print,  spawn,          {.v = scrotcmd } },
+	{ MODKEY,                       XK_v,      spawn,          {.v = editorcmd } },
 	{ MODKEY|ShiftMask,             XK_x,      spawn,          {.v = killcmd } },
 
 	/* dwm */
