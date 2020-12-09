@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int rmaster            = 1;        /* 1 means master-area is initially on the right */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
@@ -30,7 +30,6 @@ static const Rule rules[] = {
 	{ "Firefox",     NULL,       NULL,           0,         0,          0,           0,         -1 },
 	{ "Pavucontrol", NULL,       NULL,           0,         1,          0,           0,         -1 },
 	{ "Gpick",       NULL,       NULL,           0,         1,          0,           0,         -1 },
-	{ "gvim",        NULL,       NULL,           0,         0,          0,           0,         -1 },
 
 	/* terminal emulators */
 	{ "alacritty",      NULL,       NULL,           0,         0,          1,           -1,         -1 },
@@ -81,18 +80,18 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run",              NULL };
 static const char *passcmd[]  = { "passmenu", "-l", "10",   NULL };
 static const char *wallcmd[]  = { "random-wallpaper", "-f", NULL };
-static const char *termcmd[]  = { "st",                     NULL };
+static const char *termcmd[]  = { "alacritty",              NULL };
 static const char *wwwcmd[]   = { "firefox",                NULL };
-static const char *gvimcmd[]  = { "gvim",                   NULL };
 static const char *scrotcmd[] = { "scrot",                  NULL };
 static const char *lockcmd[]  = { "slock",                  NULL };
+static const char *killcmd[]  = { "xkill",                  NULL };
 
 /* function keys */
 static const char *brightnessupcmd[] = { "dwm_backlight", "up", "100",   NULL };
-static const char *brightnessdowncmd[] = { "dwm_backlight", "down", "100",   NULL };
-static const char *voltogcmd[] = { "amixer", "-D", "pulse", "sset", "Master", "toggle",  NULL };
-static const char *volupcmd[] = { "amixer", "-D", "pulse", "sset", "Master", "5%+",  NULL };
-static const char *voldowncmd[] = { "amixer", "-D", "pulse", "sset", "Master", "5%-",  NULL };
+static const char *brightnessdncmd[] = { "dwm_backlight", "down", "100", NULL };
+static const char *voltogcmd[]  = { "amixer", "-D", "pulse", "sset", "Master", "toggle",  NULL };
+static const char *volupcmd[]   = { "amixer", "-D", "pulse", "sset", "Master", "5%+",     NULL };
+static const char *voldowncmd[] = { "amixer", "-D", "pulse", "sset", "Master", "5%-",     NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -100,22 +99,24 @@ static Key keys[] = {
 	/* applications */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = passcmd } },
-        { MODKEY,                       XK_g,      spawn,          {.v = gvimcmd } },
-	{ MODKEY,                       XK_r,      spawn,          {.v = wallcmd } },
+	{ MODKEY,                       XK_w,      spawn,          {.v = wallcmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = wwwcmd } },
 	{ MODKEY,                       XK_Print,  spawn,          {.v = scrotcmd } },
+	{ MODKEY|ShiftMask,             XK_x,      spawn,          {.v = killcmd } },
 
 	/* dwm */
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_space,  zoom,           {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.025} },
+	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.025} },
 	{ MODKEY|ShiftMask,             XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = lockcmd } },
+	{ MODKEY,                       XK_r,      rotatestack,    {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_r,      rotatestack,    {.i = +1 } },
 	// { MODKEY,                       XK_Tab,    view,           {0} },
 
 	/* layouts */
@@ -137,7 +138,7 @@ static Key keys[] = {
 	/* FN keys */
 	{ 0,                            XF86XK_Search,             spawn,          {.v = dmenucmd } },
 	{ 0,                            XF86XK_MonBrightnessUp,    spawn,          {.v = brightnessupcmd } },
-	{ 0,                            XF86XK_MonBrightnessDown,  spawn,          {.v = brightnessdowncmd } },
+	{ 0,                            XF86XK_MonBrightnessDown,  spawn,          {.v = brightnessdncmd } },
 	{ 0,                            XF86XK_AudioMute,          spawn,          {.v = voltogcmd } },
 	{ 0,                            XF86XK_AudioRaiseVolume,   spawn,          {.v = volupcmd } },
 	{ 0,                            XF86XK_AudioLowerVolume,   spawn,          {.v = voldowncmd } },
@@ -170,4 +171,3 @@ static Button buttons[] = {
 	// { ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	// { ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
-
